@@ -53,25 +53,26 @@
                 <div class="text-center">
                   <h1 class="h4 text-gray-900 mb-4">Efetue o login!</h1>
                 </div>
-                <form class="user" method="POST" name="form_auth" action="<?php echo base_url('login/auth'); ?>">
-                  <div class="form-group">
-                    <div class="input-group">
-                      <div class="input-group-prepend">
-                        <div class="input-group-text"><i class="far fa-user"></i></div>
-                      </div>
-                      <input type="email" class="form-control form-control-user" name="email" placeholder="Identidade">
-                    </div>
-                  </div>
-                  <div class="form-group">
+                <?php $attibutes = array('class' => 'user'); ?>
+                <?php echo form_open('auth/login', $attibutes) ?>
+                <div class="form-group">
                   <div class="input-group">
-                      <div class="input-group-prepend">
-                        <div class="input-group-text"><i class="fas fa-unlock-alt"></i></div>
-                      </div>
-                    <input type="password" class="form-control form-control-user" name="password" placeholder="Entre com sua Senha...">
+                    <div class="input-group-prepend">
+                      <div class="input-group-text"><i class="far fa-user"></i></div>
+                    </div>
+                    <?php echo form_input($identity,'', array('class' => 'form-control form-control-user', 'placeholder' => 'Identidade', 'autofocus' => '')); ?>
                   </div>
+                </div>
+                <div class="form-group">
+                  <div class="input-group">
+                    <div class="input-group-prepend">
+                      <div class="input-group-text"><i class="fas fa-unlock-alt"></i></div>
+                    </div>
+                    <?php echo form_password($password, '', array('class' => 'form-control form-control-user', 'placeholder' => 'Sua senha...')); ?>
                   </div>
-                  <button type="submit" class="btn btn-primary btn-user btn-block">Entrar</button>
-                </form>
+                </div>
+                <?php echo form_button('button', 'Entrar', array('type' => 'submit', 'class' => 'btn btn-user btn-primary btn-block')); ?>
+                <?php echo form_close(); ?>
                 <hr>
               </div>
             </div>
@@ -81,24 +82,3 @@
     </div>
   </div>
 </div>
-<p>
-  <?php echo lang('login_identity_label', 'identity'); ?>
-  <?php echo form_input($identity); ?>
-</p>
-
-<p>
-  <?php echo lang('login_password_label', 'password'); ?>
-  <?php echo form_input($password); ?>
-</p>
-
-<p>
-  <?php echo lang('login_remember_label', 'remember'); ?>
-  <?php echo form_checkbox('remember', '1', FALSE, 'id="remember"'); ?>
-</p>
-
-
-<p><?php echo form_submit('submit', lang('login_submit_btn')); ?></p>
-
-<?php echo form_close(); ?>
-
-<p><a href="forgot_password"><?php echo lang('login_forgot_password'); ?></a></p>
