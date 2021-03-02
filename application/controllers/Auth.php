@@ -67,14 +67,17 @@ class Auth extends CI_Controller
 	 */
 	public function login()
 	{
+		
 		$this->data['title'] = $this->lang->line('login_heading');
-	
+
 		// validate form input
 		$this->form_validation->set_rules('identity', str_replace(':', '', $this->lang->line('login_identity_label')), 'required');
 		$this->form_validation->set_rules('password', str_replace(':', '', $this->lang->line('login_password_label')), 'required');
 
 		if ($this->form_validation->run() === TRUE)
 		{
+
+			
 			// check to see if the user is logging in
 			// check for "remember me"
 			$remember = (bool)$this->input->post('remember');
@@ -84,7 +87,7 @@ class Auth extends CI_Controller
 				//if the login is successful
 				//redirect them back to the home page
 				$this->session->set_flashdata('message', $this->ion_auth->messages());
-				redirect('/', 'refresh');
+				redirect('home', 'refresh');
 			}
 			else
 			{
@@ -96,6 +99,7 @@ class Auth extends CI_Controller
 		}
 		else
 		{
+		
 			// the user is not logging in so display the login page
 			// set the flash data error message if there is one
 			$this->data['message'] = (validation_errors()) ? validation_errors() : $this->session->flashdata('message');
