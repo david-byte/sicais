@@ -68,11 +68,11 @@ class Auth extends CI_Controller
 	public function login()
 	{
 		
-		$this->data['title'] = $this->lang->line('login_heading');
+		//$this->data['title'] = $this->lang->line('login_heading');
 
 		// validate form input
-		$this->form_validation->set_rules('identity', str_replace(':', '', $this->lang->line('login_identity_label')), 'required');
-		$this->form_validation->set_rules('password', str_replace(':', '', $this->lang->line('login_password_label')), 'required');
+		$this->form_validation->set_rules('identity', '','required');
+		$this->form_validation->set_rules('password','', 'required');
 
 		if ($this->form_validation->run() === TRUE)
 		{
@@ -80,9 +80,9 @@ class Auth extends CI_Controller
 			
 			// check to see if the user is logging in
 			// check for "remember me"
-			$remember = (bool)$this->input->post('remember');
+			//$remember = (bool)$this->input->post('remember');
 
-			if ($this->ion_auth->login($this->input->post('identity'), $this->input->post('password'), $remember))
+			if ($this->ion_auth->login($this->input->post('identity'), $this->input->post('password')))
 			{
 				//if the login is successful
 				//redirect them back to the home page
@@ -93,16 +93,17 @@ class Auth extends CI_Controller
 			{
 				// if the login was un-successful
 				// redirect them back to the login page
-				$this->session->set_flashdata('message', $this->ion_auth->errors());
+				$this->session->set_flashdata('error','Identidade ou Senha não confere');
 				redirect('auth/login', 'refresh'); // use redirects instead of loading views for compatibility with MY_Controller libraries
 			}
 		}
 		else
 		{
+			
 		
 			// the user is not logging in so display the login page
 			// set the flash data error message if there is one
-			$this->data['message'] = (validation_errors()) ? validation_errors() : $this->session->flashdata('message');
+		//	$this->data['message'] = (validation_errors()) ? validation_errors() : $this->session->flashdata('message');
 
 			$this->data['identity'] = [
 				'name' => 'identity',
