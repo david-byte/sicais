@@ -71,7 +71,7 @@
                     <?php echo form_password($password, '', array('class' => 'form-control form-control-user', 'placeholder' => 'Sua senha...')); ?>
                   </div>
                 </div>
-                <?php echo form_button('button', 'Entrar', array('type' => 'submit', 'class' => 'btn btn-user btn-primary btn-block')); ?>
+                <?php echo form_submit('button', 'Entrar', array('type' => 'submit', 'class' => 'btn btn-user btn-primary btn-block')); ?>
                 <?php echo form_close(); ?>
                 <hr>
               </div>
